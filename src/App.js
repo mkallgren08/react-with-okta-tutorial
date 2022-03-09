@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Route, Link} from 'react-router-dom';
+import { SecureRoute, LoginCallback } from '@okta/okta-react';
 
-function App() {
+import LoginPage from './pages/Login';
+import AdminDashboard from './pages/AdminDashboard';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Link to="/">Home</Link>&nbsp;
+      <Link to="/admin">Dashboard</Link>
+      <Route exact path="/" component={LoginPage} />
+      <SecureRoute exact path="/admin" component={AdminDashboard} />
+      <Route path="/callback" component={LoginCallback} />
+    </>
+  )
 }
 
 export default App;

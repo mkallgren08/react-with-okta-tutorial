@@ -1,17 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import { OktaAuth } from '@okta/okta-auth-js';
+import { Security } from '@okta/okta-react';
+
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+console.log(process.env)
+
+const Issuer=process.env.REACT_APP_OKTA_ISSUER
+
+const oktaConfig = {
+  issuer: 'https://dev-81989351.okta.com/oauth2/default',
+  redirect_uri: `${window.location.origin}/callback`,
+  client_id: process.env.REACT_APP_OKTA_CLIENT_ID,
+};
+
+const oktaAuth = new OktaAuth(oktaConfig);
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <BrowserRouter>
+    <Security oktaAuth={oktaAuth}>
+      <App />
+    </Security>
+  </BrowserRouter>,
+  document.getElementById('root'),
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+if (module.hot) module.hot.accept();
+
