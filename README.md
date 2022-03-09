@@ -1,7 +1,7 @@
 # How to Create this Application
 
 ##### Created using the [tutorial](https://developer.okta.com/docs/guides/sign-in-to-spa-embedded-widget/react/main/#create-an-okta-app-integration)
-
+ 
 1. Install `node` and `npm` on your machine
 3. Run the following commands to create a React Application [using create-react-app](https://create-react-app.dev/docs/getting-started)
 
